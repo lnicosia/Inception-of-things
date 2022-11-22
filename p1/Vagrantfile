@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+	config.vm.box = "generic/alpine38"
+	config.vm.hostname = "lumenthiS"
+	config.vm.network "private_network",
+		:ip => "192.168.42.110",
+		:name => "eth1"
+	config.vm.provider :libvirt do |libvirt|
+		libvirt.cpus = 1
+		libvirt.memory = 512
+		libvirt.management_network_name = 'vagrant-libvirt'
+		libvirt.management_network_address = '192.168.42.2/24'
+	end
+end
