@@ -7,14 +7,28 @@
 # you're doing.
 Vagrant.configure("2") do |config|
 	config.vm.box = "generic/alpine38"
-	config.vm.hostname = "lumenthiS"
-	config.vm.network "private_network",
-		:ip => "192.168.42.110",
-		:name => "eth1"
-	config.vm.provider :libvirt do |libvirt|
-		libvirt.cpus = 1
-		libvirt.memory = 512
-		libvirt.management_network_name = 'vagrant-libvirt'
-		libvirt.management_network_address = '192.168.42.2/24'
+	config.vm.define "lumenthiS" do |lumenthiS|
+		lumenthiS.vm.hostname = "lumenthiS"
+		lumenthiS.vm.network "private_network",
+			:ip => "192.168.42.110",
+			:name => "eth1"
+		lumenthiS.vm.provider :libvirt do |libvirt|
+			libvirt.cpus = 1
+			libvirt.memory = 512
+			libvirt.management_network_name = 'vagrant-libvirt'
+			libvirt.management_network_address = '192.168.42.2/24'
+		end
+	end
+	config.vm.define "lumenthiSW" do |lumenthiSW|
+		lumenthiSW.vm.hostname = "lumenthiSW"
+		lumenthiSW.vm.network "private_network",
+			:ip => "192.168.42.111",
+			:name => "eth1"
+		lumenthiSW.vm.provider :libvirt do |libvirt|
+			libvirt.cpus = 1
+			libvirt.memory = 512
+			libvirt.management_network_name = 'vagrant-libvirt'
+			libvirt.management_network_address = '192.168.42.2/24'
+		end
 	end
 end
