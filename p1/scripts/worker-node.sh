@@ -8,10 +8,9 @@ sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /
 echo "Installing k3s..."
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -
 
-# echo "Starting server..."
+# sudo service k3s status
 # sudo /usr/local/bin/k3s server
-
-echo "Checking nodes..."
-kubectl get nodes
+# k3s-killall.sh
+# sudo /usr/local/bin/kubectl get nodes
 
 echo "Worker configuration done"

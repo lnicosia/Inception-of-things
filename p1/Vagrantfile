@@ -6,7 +6,7 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
-	config.vm.box = "generic/alpine38"
+	config.vm.box = "centos/8"
 	config.vm.define "lumenthiS" do |lumenthiS|
 		lumenthiS.vm.hostname = "lumenthiS"
 		lumenthiS.vm.network "private_network",
