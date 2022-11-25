@@ -7,36 +7,29 @@
 # you're doing.
 Vagrant.configure("2") do |config|
 	config.vm.box = "centos/8"
-	config.vm.define "cboutierS" do |cboutierS|
-		cboutierS.vm.hostname = "cboutierS"
-		cboutierS.vm.network "private_network",
+	config.vm.define "lumenthiS" do |lumenthiS|
+		lumenthiS.vm.hostname = "lumenthiS"
+		lumenthiS.vm.network "private_network",
 			:ip => "192.168.42.110"
-		cboutierS.vm.provider :libvirt do |libvirt|
+		lumenthiS.vm.provider :libvirt do |libvirt|
 			libvirt.cpus = 1
 			libvirt.memory = 512
 			libvirt.management_network_name = 'vagrant-libvirt'
 			libvirt.management_network_address = '192.168.42.2/24'
 		end
-		
-		    config.vm.synced_folder "confs/", "/vagrant/confs", type: "rsync"
-
-		cboutierS.vm.provision :shell, path: "scripts/master-node.sh", run: 'always'
+		lumenthiS.vm.provision :shell, path: "scripts/master-node.sh", run: 'always'
 	end
-	config.vm.define "cboutierSW" do |cboutierSW|
-		cboutierSW.vm.hostname = "cboutierSW"
-		cboutierSW.vm.network "private_network",
+	config.vm.define "lumenthiSW" do |lumenthiSW|
+		lumenthiSW.vm.hostname = "lumenthiSW"
+		lumenthiSW.vm.network "private_network",
 			:ip => "192.168.42.111"
-		cboutierSW.vm.provider :libvirt do |libvirt|
+		lumenthiSW.vm.provider :libvirt do |libvirt|
 			libvirt.cpus = 1
 			libvirt.memory = 512
 			libvirt.management_network_name = 'vagrant-libvirt'
 			libvirt.management_network_address = '192.168.42.2/24'
 		end
-		
-		    config.vm.synced_folder "confs/", "/vagrant/confs", type: "rsync"
-
-
-			cboutierSW.vm.provision :shell, path: "scripts/worker-node.sh", run: 'always'
+		lumenthiSW.vm.provision :shell, path: "scripts/worker-node.sh", run: 'always'
 	end
 end
 
