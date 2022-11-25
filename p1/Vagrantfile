@@ -32,3 +32,4 @@ Vagrant.configure("2") do |config|
 		lumenthiSW.vm.provision :shell, path: "scripts/worker-node.sh", run: 'always'
 	end
 end
+
