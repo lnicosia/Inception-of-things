@@ -1,4 +1,3 @@
-
 # ===============Docker installation===============
 
 # Dependencies
@@ -38,11 +37,17 @@ rm -f kubectl
 wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 echo "source <(k3d completion bash)" >> ~/.bashrc
 
-# Tester sans sudo
 sudo k3d cluster create mycluster
-
 sudo kubectl create namespace dev
 
 sudo kubectl create namespace argocd
 sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 wget https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-amd64
+
+# Enable port redirection
+sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 1>/dev/null 2>/dev/null
+
+# Connect to the argocd app (https://localhost:8080)
+# Get the password
+sudo kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}” | sed 's/^.//;s/.$//' | base64 -d
+# CdBVKna2-FWtRR2q
