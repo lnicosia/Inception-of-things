@@ -45,7 +45,7 @@ sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-
 wget https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-amd64
 
 # Enable port redirection
-sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 1>/dev/null 2>/dev/null
+# sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 1>/dev/null 2>/dev/null &
 
 # Connect to the argocd app (https://localhost:8080)
 # Get the password
