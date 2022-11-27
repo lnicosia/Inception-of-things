@@ -1,4 +1,14 @@
-apiVersion: k3d.io/v1alpha4
-kind: Simple
-image: rancher/k3s:v1.20.4-k3s1
-token: "713705"
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-wilapp
+  namespace: argocd
+spec:
+  destination:
+    namespace: dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/lnicosia/lnicosia-IoT-config
+    path: .
+    targetRevision: master

@@ -42,7 +42,8 @@ sudo kubectl create namespace dev
 
 sudo kubectl create namespace argocd
 sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-wget https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-amd64
+wget https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-amd64 argocd -O argocd
+chmod +x argocd
 
 # Check if cluster is up
 # sudo kubectl get nodes
@@ -67,6 +68,8 @@ wget https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-a
 
 # =========wil app===========
 sudo kubectl apply -f confs/wil-app.yml
+# Connect ArgoCD to that repository
+sudo kubectl apply -f confs/config.yml
 
 # Check pods in the dev namespace
 # sudo kubectl get pods -n dev
