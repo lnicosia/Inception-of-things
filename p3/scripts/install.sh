@@ -50,8 +50,12 @@ wget https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-a
 # Check if pods are up
 # sudo kubectl get pods -n argocd
 
+# Check namespaces
+# sudo kubectl get ns
+
+# ===========ArgoCD UI=============
 # Enable port redirection
-# sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 1>/dev/null 2>/dev/null &
+# sudo kubectl port-forward -n argocd svc/argocd-server 8080:443
 
 # Check the argoCD ui
 # firefox https://localhost:8080
@@ -59,4 +63,10 @@ wget https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-a
 # Connect to the argocd app (https://localhost:8080)
 # Username: admin
 # Get the password
-sudo kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}” | sed 's/^.//;s/.$//' | base64 -d
+# sudo kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}” | sed 's/^.//;s/.$//' | base64 -d
+
+# =========wil app===========
+sudo kubectl apply -f confs/wil-app.yml
+
+# Check pods in the dev namespace
+# sudo kubectl get pods -n dev
