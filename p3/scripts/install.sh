@@ -44,10 +44,19 @@ sudo kubectl create namespace argocd
 sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 wget https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-amd64
 
+# Check if cluster is up
+# sudo kubectl get nodes
+
+# Check if pods are up
+# sudo kubectl get pods -n argocd
+
 # Enable port redirection
 # sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 1>/dev/null 2>/dev/null &
 
+# Check the argoCD ui
+# firefox https://localhost:8080
+
 # Connect to the argocd app (https://localhost:8080)
+# Username: admin
 # Get the password
 sudo kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}” | sed 's/^.//;s/.$//' | base64 -d
-# CdBVKna2-FWtRR2q
