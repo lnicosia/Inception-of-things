@@ -59,6 +59,10 @@ chmod +x argocd
 # Connect ArgoCD to that repository
 sudo kubectl apply -f confs/config.yml
 
+curl parrot.live &
+sleep 60
+kill $!
+
 # Check pods in the dev namespace
 # sudo kubectl get pods -n dev
 
