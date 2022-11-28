@@ -1,7 +1,7 @@
 # ===============Docker installation===============
 
 # Dependencies
-sudo apt update
+sudo apt -y update
 sudo apt -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
 
 # Import Docker GPG key
@@ -14,7 +14,7 @@ sudo add-apt-repository \
    stable"
 
 # Docker install
-sudo apt update
+sudo apt -y update
 sudo apt install docker-ce docker-ce-cli containerd.io -y
 
 # Start service

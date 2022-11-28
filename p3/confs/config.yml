@@ -12,3 +12,7 @@ spec:
     repoURL: https://github.com/lnicosia/lnicosia-IoT-config
     path: .
     targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
