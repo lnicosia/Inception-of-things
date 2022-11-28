@@ -21,7 +21,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io -y
 sudo systemctl enable --now docker
 
 sudo groupadd docker
-sudo usermod -aG $USER
+sudo usermod -aG docker $USER
 
 # ===============kubectl installation===============
 
