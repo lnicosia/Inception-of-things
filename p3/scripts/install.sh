@@ -65,6 +65,7 @@ sudo kubectl apply -f confs/config.yml
 # ===========ArgoCD UI=============
 # Enable port redirection
 sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 1>/dev/null 2>/dev/null &
+sudo kubectl port-forward -n dev svc/wil-playground 8888:8888 1>/dev/null 2>/dev/null &
 
 # Package to copy passwd to clipboard
 sudo apt-get install xclip -y
