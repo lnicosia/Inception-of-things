@@ -5,7 +5,7 @@ sudo apt -y update
 sudo apt -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
 
 # Import Docker GPG key
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker-archive-keyring.gpg
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/docker-archive-keyring.gpg
 
 # Add Docker repo to debian
 sudo add-apt-repository \
@@ -54,9 +54,20 @@ chmod +x argocd
 # Check namespaces
 # sudo kubectl get ns
 
+# =========wil app===========
+# sudo kubectl apply -f confs/wil-app.yml
+# Connect ArgoCD to that repository
+sudo kubectl apply -f confs/config.yml
+
+# Check pods in the dev namespace
+# sudo kubectl get pods -n dev
+
 # ===========ArgoCD UI=============
 # Enable port redirection
-# sudo kubectl port-forward -n argocd svc/argocd-server 8080:443
+sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 1>/dev/null 2>/dev/null &
+
+# Package to copy passwd to clipboard
+sudo apt-get install xclip -y
 
 # Check the argoCD ui
 # firefox https://localhost:8080
@@ -64,12 +75,13 @@ chmod +x argocd
 # Connect to the argocd app (https://localhost:8080)
 # Username: admin
 # Get the password
-# sudo kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}” | sed 's/^.//;s/.$//' | base64 -d
+echo "\n======Credentials======"
+echo "Login: admin"
+echo -n "Password: "
+sudo kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}” | sed 's/^.//;s/.$//' | base64 -d | xclip -sel clip
+sudo kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}” | sed 's/^.//;s/.$//' | base64 -d
+echo "\n=======================\n"
+echo "Password is copied to the clipboard :)"
 
-# =========wil app===========
-sudo kubectl apply -f confs/wil-app.yml
-# Connect ArgoCD to that repository
-sudo kubectl apply -f confs/config.yml
-
-# Check pods in the dev namespace
-# sudo kubectl get pods -n dev
+# ===========DELETE ALL===========
+# sudo k3d cluster delete mycluster
