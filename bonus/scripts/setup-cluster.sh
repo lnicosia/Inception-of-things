@@ -1,3 +1,6 @@
+# Delte previous cluster
+sudo k3d cluster delete mycluster
+
 # ===============Docker installation===============
 
 # Dependencies
@@ -71,8 +74,13 @@ kill $!
 
 # ===========ArgoCD UI=============
 # Enable port redirection
-sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 1>/dev/null 2>/dev/null &
-sudo kubectl port-forward -n dev svc/wil-playground 8888:8888 1>/dev/null 2>/dev/null &
+while true
+  do sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 1>/dev/null 2>/dev/null
+done &
+
+while true
+  do sudo kubectl port-forward -n dev svc/wil-playground 8888:8888 1>/dev/null 2>/dev/null
+done &
 
 # Package to copy passwd to clipboard
 sudo apt-get install xclip -y
@@ -91,5 +99,5 @@ sudo kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.d
 echo "\n=======================\n"
 echo "Password is copied to the clipboard :)"
 
-# ===========DELETE ALL===========
-# sudo k3d cluster delete mycluster
+# Change the version of wil ap
+# sed -i 's/wil42\/playground\:v1/wil42\/playground\:v2/g' ./wil-app.yml

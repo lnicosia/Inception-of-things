@@ -17,6 +17,6 @@ Vagrant.configure("2") do |config|
 			libvirt.management_network_name = 'vagrant-libvirt'
 			libvirt.management_network_address = '192.168.42.2/24'
 		end
-		#lumenthiS.vm.provision :shell, path: "scripts/masterh", run: 'always'
+		lumenthiS.vm.provision :shell, path: "scripts/centos-gitlab.sh", run: 'always'
 	end
 end
