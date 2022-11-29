@@ -65,12 +65,18 @@ chmod +x argocd
 # Connect ArgoCD to that repository
 sudo kubectl apply -f confs/config.yml
 
-curl parrot.live &
-sleep 60
-kill $!
+while [ true ]
+	do
+		i=$(sudo kubectl get pod -n argocd | grep "1/1" | wc -l)
+		if [ $i = 7 ]
+		then
+			echo "\rReady!"
+			break
+		else
+			echo -n "\rInitializing cluster..."
+		fi
+	done;
 
-# Check pods in the dev namespace
-# sudo kubectl get pods -n dev
 
 # ===========ArgoCD UI=============
 # Enable port redirection
